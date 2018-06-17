@@ -1,0 +1,6 @@
+D:\C#repos\WPF\GaneAdventureWPF\Engine\bin\Debug\Engine.dll
+D:\C#repos\WPF\GaneAdventureWPF\Engine\bin\Debug\Engine.pdb
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Debug\Engine.csprojAssemblyReference.cache
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Debug\Engine.csproj.CoreCompileInputs.cache
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Debug\Engine.dll
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Debug\Engine.pdb
