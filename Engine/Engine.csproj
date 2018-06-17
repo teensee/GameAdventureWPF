@@ -40,9 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\WorldFactory.cs" />
+    <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\World.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\GameSessionViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Location\FarmFields.png" />
+    <Content Include="Images\Location\Farmhouse.png" />
+    <Content Include="Images\Location\HerbalistsGarden.png" />
+    <Content Include="Images\Location\HerbalistsHut.png" />
+    <Content Include="Images\Location\Home.png" />
+    <Content Include="Images\Location\SpiderForest.png" />
+    <Content Include="Images\Location\TownGate.png" />
+    <Content Include="Images\Location\TownSquare.png" />
+    <Content Include="Images\Location\Trader.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

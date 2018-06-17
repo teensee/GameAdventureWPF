@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using Engine.ViewModels;
 
 namespace GaneAdventureWPF
@@ -21,10 +8,33 @@ namespace GaneAdventureWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        GameSessionViewModel _gs;
         public MainWindow()
         {
+            _gs = new GameSessionViewModel();
             InitializeComponent();
-            DataContext = new GameSessionViewModel();
+            DataContext = _gs;
         }
+
+        private void OnClick_MoveNorth(object sender, RoutedEventArgs e)
+        {
+            _gs.MoveNorth();
+        }
+
+        private void OnClick_MoveWest(object sender, RoutedEventArgs e)
+        {
+            _gs.MoveWest();             
+        }
+
+        private void OnClick_MoveEast(object sender, RoutedEventArgs e)
+        {
+            _gs.MoveEast();
+        }
+
+        private void OnClick_MoveSouth(object sender, RoutedEventArgs e)
+        {
+            _gs.MoveSouth();
+        }
+        
     }
 }
