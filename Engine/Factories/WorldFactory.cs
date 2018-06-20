@@ -49,6 +49,9 @@ namespace Engine.Factories
                 "Herbalist Hut", "You see a small hut, with plants drying from the roof",
                 @"D:\C#repos\WPF\GaneAdventureWPF\Engine\Images\Location\HerbalistsHut.png");
 
+            //Add quest in location
+            newWorld.LocationAt(0, 1).QuestAvailableHere.Add(QuestFactory.GetQuestByID(1));
+
             newWorld.AddLocation(0, 2,
                 "Herbalist's garden", "There are many plants here, with snakes hiding behind them",
                 @"D:\C#repos\WPF\GaneAdventureWPF\Engine\Images\Location\HerbalistsGarden.png");

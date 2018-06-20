@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Engine.Factories;
 using System.ComponentModel;
 
@@ -27,6 +25,8 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasLocationToNorth));
                 OnPropertyChanged(nameof(HasLocationToSouth));
                 OnPropertyChanged(nameof(HasLocationToWest));
+
+                GivePlayerQuestsAtLocation();
             }
         }
 
@@ -34,26 +34,22 @@ namespace Engine.ViewModels
 
         public bool HasLocationToNorth
         {
-            get => CurrentWorld.LocationAt(
-            CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
+            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
         }
 
         public bool HasLocationToWest
         {
-            get => CurrentWorld.LocationAt(
-            CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
+            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
         }
 
         public bool HasLocationToEast
         {
-            get => CurrentWorld.LocationAt(
-            CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
+            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
         }
 
         public bool HasLocationToSouth
         {
-            get => CurrentWorld.LocationAt(
-            CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
+            get => CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
         }
 
         #endregion
@@ -105,6 +101,14 @@ namespace Engine.ViewModels
 
         #endregion
 
+        private void GivePlayerQuestsAtLocation()
+        {
+            foreach(Quest quest in CurrentLocation.QuestAvailableHere)
+            {
+                if (!CurrentPlayer.Quests.Any(q => q.PlayerQuest.ID == quest.ID))
+                    CurrentPlayer.Quests.Add(new QuestStatus(quest));
+            }
+        }
 
     }
 }
