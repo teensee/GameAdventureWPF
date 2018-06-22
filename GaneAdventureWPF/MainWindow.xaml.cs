@@ -51,7 +51,7 @@ namespace GaneAdventureWPF
 
         private void OnClick_AttackMonster(object sender, RoutedEventArgs e)
         {
-
+            _gameSessionVM.AttackCurrentMonster();
         }
     }
 }

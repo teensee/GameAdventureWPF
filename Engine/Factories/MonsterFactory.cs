@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Factories
 {
@@ -41,11 +39,11 @@ namespace Engine.Factories
             }
         }
 
-        private static void AddLootItem(Monster monsterName, int itemID, int percentage)
+        private static void AddLootItem(Monster monster, int itemID, int percentage)
         {
-            if(RandomNumberGenerator.NumberBetween(1,100) <= percentage)
+            if (RandomNumberGenerator.NumberBetween(1, 100) <= percentage)
             {
-                monsterName.Inventory.Add(new ItemQuantity(itemID, 1));
+                monster.sss.Add(new ItemQuantity(itemID, 1));
             }
         }
     }
