@@ -24,19 +24,26 @@ namespace Engine.Models
             }
         }
 
+        public int MaximumDamage { get; set; }
+        public int MinimumDamage { get; set; }
+
         public int RewardExpiriencePoints { get; set; }
         public int RewardGold { get; set; }
 
         public ObservableCollection<ItemQuantity> Inventory { get; set; }
 
-        public Monster(string name, string img, int maxHP, int hitPoints, int rewExp, int rewGold) 
+        public Monster(string name, int maxHP, int currHitPoints,int maxDamage,int minDamage, int rewExp, int rewGold, string img)
         {
             Name = name;
-            ImageName = img;
             MaximumHitPoints = maxHP;
-            HitPoints = hitPoints;
+            HitPoints = currHitPoints;
+            MaximumDamage = maxDamage;
+            MinimumDamage = minDamage;
             RewardExpiriencePoints = rewExp;
             RewardGold = rewGold;
+            ImageName = string.Format(@"D:\C#repos\WPF\GaneAdventureWPF\Engine\Images\Monsters\{0}", img);
+
+            Inventory = new ObservableCollection<ItemQuantity>();
         }
     }
 }

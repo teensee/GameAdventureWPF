@@ -29,7 +29,7 @@ namespace Engine.Models
             //needed item
             ItemToComplete = itemToComplete;
 
-            //reward))
+            //reward
             RewardExpirience = rewExp;
             RewardGold = rewGold;
             RewardItem = rewItem;

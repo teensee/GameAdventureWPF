@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Documents;
+using Engine.EventArgs;
 using Engine.ViewModels;
 
 namespace GaneAdventureWPF
@@ -8,33 +10,48 @@ namespace GaneAdventureWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameSessionViewModel _gs;
+        GameSessionViewModel _gameSessionVM;
         public MainWindow()
         {
-            _gs = new GameSessionViewModel();
             InitializeComponent();
-            DataContext = _gs;
+
+            _gameSessionVM = new GameSessionViewModel();
+
+            _gameSessionVM.OnMessageRaised += _gameSessionVM_OnMessageRaised;
+
+            DataContext = _gameSessionVM;
+
+        }
+
+        private void _gameSessionVM_OnMessageRaised(object sender, GameMessageEventArgs e)
+        {
+            GameMessages.Document.Blocks.Add(new Paragraph(new Run(e.Message)));
+            GameMessages.ScrollToEnd();
         }
 
         private void OnClick_MoveNorth(object sender, RoutedEventArgs e)
         {
-            _gs.MoveNorth();
+            _gameSessionVM.MoveNorth();
         }
 
         private void OnClick_MoveWest(object sender, RoutedEventArgs e)
         {
-            _gs.MoveWest();             
+            _gameSessionVM.MoveWest();             
         }
 
         private void OnClick_MoveEast(object sender, RoutedEventArgs e)
         {
-            _gs.MoveEast();
+            _gameSessionVM.MoveEast();
         }
 
         private void OnClick_MoveSouth(object sender, RoutedEventArgs e)
         {
-            _gs.MoveSouth();
+            _gameSessionVM.MoveSouth();
         }
-        
+
+        private void OnClick_AttackMonster(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

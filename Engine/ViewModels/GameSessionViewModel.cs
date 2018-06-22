@@ -1,4 +1,5 @@
 ﻿using Engine.Models;
+using Engine.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,10 @@ namespace Engine.ViewModels
 {
     public class GameSessionViewModel : BaseNotificationClass
     {
+        public event EventHandler<GameMessageEventArgs> OnMessageRaised;
+
         private Location _currentLocation;
+        private Monster _currentMonster;
 
         public Player CurrentPlayer { get; set; }
         public World CurrentWorld { get; set; }
@@ -27,8 +31,29 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasLocationToWest));
 
                 GivePlayerQuestsAtLocation();
+                GetMonsterAtLocation();
             }
         }
+
+        public Monster CurrentMonster
+        {
+            get => _currentMonster;
+            set
+            {
+                _currentMonster = value;
+
+                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged(nameof(HasMonster));
+
+                if(CurrentMonster != null)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"You see a {CurrentMonster.Name} here");
+                }
+            }
+        }
+
+        private bool HasMonster => CurrentMonster != null;
 
         #region Has location to...?
 
@@ -68,7 +93,7 @@ namespace Engine.ViewModels
             };
 
             CurrentWorld = WorldFactory.CreateWorld();
-            CurrentLocation = CurrentWorld.LocationAt(0, 0);
+            CurrentLocation = CurrentWorld.LocationAt(0, -1);
 
             CurrentPlayer.Inventory.Add(ItemFactory.CreateGameItem(1001));
         }
@@ -108,6 +133,16 @@ namespace Engine.ViewModels
                 if (!CurrentPlayer.Quests.Any(q => q.PlayerQuest.ID == quest.ID))
                     CurrentPlayer.Quests.Add(new QuestStatus(quest));
             }
+        }
+
+        private void GetMonsterAtLocation()
+        {
+            CurrentMonster = CurrentLocation.GetMonster();
+        }
+
+        private void RaiseMessage(string message)
+        {
+            OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
         }
 
     }
