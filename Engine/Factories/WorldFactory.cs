@@ -25,6 +25,7 @@ namespace Engine.Factories
                 "Farmhouse",
                 "This is the house of your neighbor, Farmer Ted.", 
                 "Farmhouse.png");
+
             newWorld.AddLocation(
                 -2, -1, 
                 "Farmer's Field", 
@@ -32,6 +33,9 @@ namespace Engine.Factories
                 "FarmFields.png");
 
             newWorld.LocationAt(-2, -1).AddMonster(2, 100);
+
+            newWorld.LocationAt(-1, -1).TraderHere =
+                TraderFactory.GerTraderByName("Farmer Ted");
 
             #endregion
 
@@ -55,6 +59,9 @@ namespace Engine.Factories
                 "There is a gate here, protecting the town from giant spider",
                 "ownGate.png");
 
+
+            newWorld.LocationAt(-1, 0).TraderHere =
+                TraderFactory.GerTraderByName("Susan");
             #endregion
 
             #region Herbalist Fields
@@ -77,6 +84,9 @@ namespace Engine.Factories
 
             //Add snake in location "Herbalist's garden"
             newWorld.LocationAt(0, 2).AddMonster(1, 100);
+
+            newWorld.LocationAt(0, 1).TraderHere =
+                TraderFactory.GerTraderByName("Pete the Herbalist");
 
             #endregion
 

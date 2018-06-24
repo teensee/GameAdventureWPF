@@ -17,6 +17,7 @@ namespace Engine.ViewModels
 
         private Location _currentLocation;
         private Monster _currentMonster;
+        private Trader _currentTrader;
 
         public Player CurrentPlayer { get; set; }
         public World CurrentWorld { get; set; }
@@ -33,8 +34,11 @@ namespace Engine.ViewModels
                 OnPropertyChanged(nameof(HasLocationToSouth));
                 OnPropertyChanged(nameof(HasLocationToWest));
 
+                CompleteQuestAtLocation();
                 GivePlayerQuestsAtLocation();
                 GetMonsterAtLocation();
+
+                CurrentTrader = CurrentLocation.TraderHere;
             }
         }
 
@@ -64,10 +68,27 @@ namespace Engine.ViewModels
         /// </summary>
         public Weapon CurrentWeapon { get; set; }
 
+        public Trader CurrentTrader
+        {
+            get => _currentTrader;
+            set
+            {
+                _currentTrader = value;
+
+                OnPropertyChanged(nameof(CurrentTrader));
+                OnPropertyChanged(nameof(HasTrader));
+            }
+        }
+
         /// <summary>
-        /// Check monster at location
+        /// Check trader on location
         /// </summary>
-        private bool HasMonster => CurrentMonster != null;
+        public bool HasTrader => CurrentTrader != null;
+
+        /// <summary>
+        /// Check monster on location
+        /// </summary>
+        public bool HasMonster => CurrentMonster != null;
 
         #region Has location to...?
 
@@ -114,7 +135,7 @@ namespace Engine.ViewModels
             {
                 Name = "Bob",
                 CharacterClass = "Fighter",
-                Gold = 1000000,
+                Gold = 0,
                 HitPoints = 10,
                 Level = 1,
                 ExperiencePoints = 0
@@ -168,18 +189,6 @@ namespace Engine.ViewModels
         #endregion
 
         /// <summary>
-        /// get new quest
-        /// </summary>
-        private void GivePlayerQuestsAtLocation()
-        {
-            foreach(Quest quest in CurrentLocation.QuestAvailableHere)
-            {
-                if (!CurrentPlayer.Quests.Any(q => q.PlayerQuest.ID == quest.ID))
-                    CurrentPlayer.Quests.Add(new QuestStatus(quest));
-            }
-        }
-
-        /// <summary>
         /// Get new monster :SSS
         /// </summary>
         private void GetMonsterAtLocation()
@@ -195,6 +204,8 @@ namespace Engine.ViewModels
         {
             OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
         }
+
+        #region Combat
 
         /// <summary>
         /// Combat logic
@@ -215,7 +226,7 @@ namespace Engine.ViewModels
             else
             {
                 CurrentMonster.HitPoints -= damageToMonster;
-                RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");
+                RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");              
             }
 
             if (CurrentMonster.HitPoints <= 0)
@@ -243,8 +254,8 @@ namespace Engine.ViewModels
             {
                 //If monster still alive let the monster attack
                 var damageToPlayer = RandomNumberGenerator.NumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
-                
-                if(damageToPlayer == 0)
+
+                if (damageToPlayer == 0)
                 {
                     RaiseMessage("The monster attacks, but missed you.");
                 }
@@ -254,7 +265,7 @@ namespace Engine.ViewModels
                     RaiseMessage($"You recieve {damageToPlayer} from {CurrentMonster.Name}.");
                 }
 
-                if(CurrentPlayer.HitPoints <= 0)
+                if (CurrentPlayer.HitPoints <= 0)
                 {
                     RaiseMessage("");
                     RaiseMessage($"The {CurrentMonster.Name} killed you.");
@@ -264,5 +275,94 @@ namespace Engine.ViewModels
                 }
             }
         }
+
+        #endregion
+
+
+
+        #region Quest logic
+
+        /// <summary>
+        /// Complete quest
+        /// </summary>
+        private void CompleteQuestAtLocation()
+        {
+            foreach (var quest in CurrentLocation.QuestAvailableHere)
+            {
+                QuestStatus questToComplete =
+                    CurrentPlayer.Quests.FirstOrDefault(q => q.PlayerQuest.ID == quest.ID && !q.isCompleted);
+
+                if (questToComplete != null)
+                {
+                    if (CurrentPlayer.HasAllTheseItems(quest.ItemToComplete))
+                    {
+                        //remove the quest completion items from the player's inventory
+                        foreach (var itemQuantity in quest.ItemToComplete)
+                        {
+                            for (int i = 0; i < itemQuantity.Quantity; i++)
+                            {
+                                CurrentPlayer.RemoveItemFromInventory(CurrentPlayer.Inventory.First(item => item.ItemTypeID == itemQuantity.ItemID));
+                            }
+                        }
+
+                        RaiseMessage("");
+                        RaiseMessage($"You completed the '{quest.Name}' quest");
+
+                        CurrentPlayer.ExperiencePoints += quest.RewardExperience;
+                        RaiseMessage($"You receive {quest.RewardExperience} experience points");
+
+                        CurrentPlayer.Gold += quest.RewardGold;
+                        RaiseMessage($"You receive {quest.RewardGold} gold");
+
+                        foreach (var itemQuantity in quest.RewardItems)
+                        {
+                            GameItem rewardItem = ItemFactory.CreateGameItem(itemQuantity.ItemID);
+
+                            CurrentPlayer.AddItemToInventory(rewardItem);
+                            RaiseMessage($"You receive a {rewardItem.Name}");
+                        }
+
+                        // Mark the Quest as completed
+                        questToComplete.isCompleted = true;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// get new quest
+        /// </summary>
+        private void GivePlayerQuestsAtLocation()
+        {
+            foreach (Quest quest in CurrentLocation.QuestAvailableHere)
+            {
+                if (!CurrentPlayer.Quests.Any(q => q.PlayerQuest.ID == quest.ID))
+                {
+                    CurrentPlayer.Quests.Add(new QuestStatus(quest));
+
+                    RaiseMessage("");
+                    RaiseMessage($"You receive the '{quest.Name}' quest");
+                    RaiseMessage(quest.Description);
+
+                    RaiseMessage("Return with:");
+                    foreach (ItemQuantity itemQuantity in quest.ItemToComplete)
+                    {
+                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                    }
+
+                    RaiseMessage("And you will receive:");
+                    RaiseMessage($"   {quest.RewardExperience} experience points");
+                    RaiseMessage($"   {quest.RewardGold} gold");
+                    foreach (ItemQuantity itemQuantity in quest.RewardItems)
+                    {
+                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+
     }
 }

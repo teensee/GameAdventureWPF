@@ -13,16 +13,16 @@ namespace Engine.Factories
 
         static QuestFactory()
         {
-            List<ItemQuantity> itemToComplete = new List<ItemQuantity>();
+            List<ItemQuantity> itemsToComplete = new List<ItemQuantity>();
             List<ItemQuantity> rewardItem = new List<ItemQuantity>();
 
-            itemToComplete.Add(new ItemQuantity(9001,5));
+            itemsToComplete.Add(new ItemQuantity(9001,5));
             rewardItem.Add(new ItemQuantity(1002, 1));
 
             _quest.Add(new Quest(1,
                 "Clear the herb garden",
                 "Defeat the snakes in the Herbalist's garden",
-                itemToComplete,
+                itemsToComplete,
                 25, 10,
                 rewardItem));
         }

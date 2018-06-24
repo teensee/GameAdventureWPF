@@ -24,7 +24,18 @@
         </Grid.ColumnDefinitions>
             
         <!-- menu -->
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Menu" Background="AliceBlue"/>
+        <Menu Grid.Row="0" Grid.Column="0">
+            <MenuItem Header="Menu">
+                <MenuItem Header="Save"/>
+                <MenuItem Header="Load"/>
+                <Separator/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="About">
+                <MenuItem Header="Simple FAQ"/>
+                <MenuItem Header="World map"/>
+            </MenuItem>
+        </Menu>
         <Grid Grid.Row="1" Grid.Column="0" Background="Aquamarine">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -66,10 +77,11 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="0" Grid.Column="0" BorderBrush="Gainsboro" BorderThickness="1">
+            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" BorderBrush="Gainsboro" BorderThickness="1">
                 <RichTextBox x:Name="GameMessages"
                              Background="Beige"
-                             VerticalScrollBarVisibility="Auto">
+                             VerticalScrollBarVisibility="Auto"
+                             IsReadOnly="True">
                     <RichTextBox.Resources>
                         <Style TargetType="{x:Type Paragraph}">
                             <Setter Property="Margin" Value="0"/>
@@ -186,7 +198,6 @@
 
             <!-- Combat control -->
             <Grid Grid.Row="0" Grid.Column="0"
-              Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"
               HorizontalAlignment="Center"
               VerticalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -207,7 +218,8 @@
 
                 <Button Grid.Row="0" Grid.Column="2"
                         Content="Use"
-                        Click="OnClick_AttackMonster"/>
+                        Click="OnClick_AttackMonster"
+                        Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"/>
             </Grid>
             
             <!-- Movemrnt control -->
@@ -232,6 +244,10 @@
                         Click="OnClick_MoveWest"   Content="West"
                         Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"/>
 
+                <Button Grid.Row="1" Grid.Column="1"
+                        Content="Trade"
+                        Visibility="{Binding HasTrader, Converter={StaticResource BooleanToVisibility}}"/>
+       
                 <Button Grid.Row="1" Grid.Column="2" 
                         Click="OnClick_MoveEast"   Content="East"
                         Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
