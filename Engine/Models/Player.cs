@@ -1,31 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Models
 {
-    public class Player : BaseNotificationClass
+    public class Player : LivingEntity
     {
-        private string _name;
         private string _characterClass;
         private int _hitPoints;
         private int _experiencePoints;
         private int _level;
-        private int _gold;
-
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
 
         public string CharacterClass
         {
@@ -68,41 +52,13 @@ namespace Engine.Models
             }
         }
 
-        public int Gold
-        {
-            get => _gold;
-            set
-            {
-                _gold = value;
-                OnPropertyChanged(nameof(Gold));
-            }
-        }
-
-        public List<GameItem> Weapons => Inventory.Where(item => item is Weapon).ToList();
-
-        public ObservableCollection<GameItem> Inventory { get; set; }
         public ObservableCollection<QuestStatus> Quests { get; set; }
 
         public Player()
         {
-            Inventory = new ObservableCollection<GameItem>();
             Quests = new ObservableCollection<QuestStatus>();
         }
 
-
-        public void AddItemToInventory(GameItem item)
-        {
-            Inventory.Add(item);
-
-            OnPropertyChanged(nameof(Weapons));
-        }
-
-        public void RemoveItemFromInventory(GameItem item)
-        {
-            Inventory.Remove(item);
-
-            OnPropertyChanged(nameof(Weapons));
-        }
 
         public bool HasAllTheseItems(List<ItemQuantity> list)
         {

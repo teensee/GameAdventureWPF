@@ -10,9 +10,6 @@ namespace Engine.EventArgs
     {
         public string Message { get; private set; }
 
-        public GameMessageEventArgs(string message)
-        {
-            Message = message;
-        }
+        public GameMessageEventArgs(string message) => Message = message;
     }
 }
