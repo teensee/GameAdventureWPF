@@ -53,5 +53,13 @@ namespace GaneAdventureWPF
         {
             _gameSessionVM.AttackCurrentMonster();
         }
+
+        private void OnClick_DisplayTradeScreen(object sender, RoutedEventArgs e)
+        {
+            TradeScreen trade = new TradeScreen();
+            trade.Owner = this;
+            trade.DataContext = _gameSessionVM;
+            trade.ShowDialog();
+        }
     }
 }

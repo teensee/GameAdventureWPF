@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\
+D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Release\
 GaneAdventureWPF
 none
 false
-DEBUG;TRACE
+TRACE
 D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\App.xaml
 2-1692046498
 
 61433406430
-14-64566708
+141355949817
 MainWindow.xaml;TradeScreen.xaml;
 
 False

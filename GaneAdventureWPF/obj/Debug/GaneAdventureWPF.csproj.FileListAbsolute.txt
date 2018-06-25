@@ -16,3 +16,5 @@ D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\GaneAdventureWPF.pdb
 D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\bin\Debug\Engine.dll
 D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\bin\Debug\Engine.pdb
 D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\GaneAdventureWPF.csproj.CopyComplete
+D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\TradeScreen.g.cs
+D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\TradeScreen.baml

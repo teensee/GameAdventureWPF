@@ -1,0 +1,6 @@
+D:\C#repos\WPF\GaneAdventureWPF\Engine\bin\Release\Engine.dll
+D:\C#repos\WPF\GaneAdventureWPF\Engine\bin\Release\Engine.pdb
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Release\Engine.g.resources
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Release\Engine.csproj.CoreCompileInputs.cache
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Release\Engine.dll
+D:\C#repos\WPF\GaneAdventureWPF\Engine\obj\Release\Engine.pdb
