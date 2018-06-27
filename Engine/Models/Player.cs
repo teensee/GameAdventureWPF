@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -9,7 +10,6 @@ namespace Engine.Models
         private string _characterClass;
         private int _hitPoints;
         private int _experiencePoints;
-        private int _level;
 
         public string CharacterClass
         {
@@ -17,45 +17,32 @@ namespace Engine.Models
             set
             {
                 _characterClass = value;
-                OnPropertyChanged(nameof(CharacterClass));
-            }
-        }
-
-        public int HitPoints
-        {
-            get => _hitPoints;
-            set
-            {
-                _hitPoints = value;
-                OnPropertyChanged(nameof(HitPoints));
+                OnPropertyChanged();
             }
         }
 
         public int ExperiencePoints
         {
             get => _experiencePoints;
-            set
+            private set
             {
                 _experiencePoints = value;
-                OnPropertyChanged(nameof(ExperiencePoints));
+                OnPropertyChanged();
+
+                SetLevelAndMaxHitPoints();
             }
 
         }
 
-        public int Level
-        {
-            get => _level;
-            set
-            {
-                _level = value;
-                OnPropertyChanged(nameof(Level));
-            }
-        }
+        public ObservableCollection<QuestStatus> Quests { get; }
 
-        public ObservableCollection<QuestStatus> Quests { get; set; }
-
-        public Player()
+        public event EventHandler OnLeveledUp;
+        public Player(string name, string characterClass, int expPoints, int maxHitPoints, int currHitPoints, int gold, int level) 
+            : base(name, maxHitPoints, currHitPoints, gold, level)
         {
+            CharacterClass = characterClass;
+            ExperiencePoints = expPoints;
+
             Quests = new ObservableCollection<QuestStatus>();
         }
 
@@ -72,5 +59,26 @@ namespace Engine.Models
 
             return true;
         }
+
+        #region leveling
+
+        public void AddExperience(int expPoints) => ExperiencePoints += expPoints;
+
+        private void SetLevelAndMaxHitPoints()
+        {
+            int originalLevel = Level;
+
+            Level = (ExperiencePoints / 100) + 1;
+
+            if(Level != originalLevel)
+            {
+                MaximumHitPoints = Level * 10;
+                CompletelyHeal();
+
+                OnLeveledUp?.Invoke(this, System.EventArgs.Empty);
+            }
+        }
+
+        #endregion
     }
 }

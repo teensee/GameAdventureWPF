@@ -24,7 +24,7 @@ namespace GaneAdventureWPF
 
             if(groupedInventoryItem != null)
             {
-                Session.CurrentPlayer.Gold += groupedInventoryItem.Item.Price;
+                Session.CurrentPlayer.RecieveGold(groupedInventoryItem.Item.Price);
                 Session.CurrentTrader.AddItemToInventory(groupedInventoryItem.Item);
                 Session.CurrentPlayer.RemoveItemFromInventory(groupedInventoryItem.Item);
             }
@@ -38,7 +38,7 @@ namespace GaneAdventureWPF
             {
                 if (Session.CurrentPlayer.Gold >= groupedInventoryItem.Item.Price)
                 {
-                    Session.CurrentPlayer.Gold -= groupedInventoryItem.Item.Price;
+                    Session.CurrentPlayer.SpendGold(groupedInventoryItem.Item.Price);
                     Session.CurrentPlayer.AddItemToInventory(groupedInventoryItem.Item);
                     Session.CurrentTrader.RemoveItemFromInventory(groupedInventoryItem.Item);
                 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaneAdventureWPF", "GaneAdv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{24164608-0C7A-4366-B1B0-45BA9F35E418}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEngine", "TestEngine\TestEngine.csproj", "{F88EA705-1E50-4EB4-B94C-A743C76F82CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{24164608-0C7A-4366-B1B0-45BA9F35E418}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24164608-0C7A-4366-B1B0-45BA9F35E418}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24164608-0C7A-4366-B1B0-45BA9F35E418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F88EA705-1E50-4EB4-B94C-A743C76F82CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F88EA705-1E50-4EB4-B94C-A743C76F82CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F88EA705-1E50-4EB4-B94C-A743C76F82CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F88EA705-1E50-4EB4-B94C-A743C76F82CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

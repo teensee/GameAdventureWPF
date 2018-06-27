@@ -1,28 +1,34 @@
 ﻿using Engine.Factories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine.Models
 {
     public class Location
     {
-        public int XCoordinate { get; set; }
-        public int YCoordinate { get; set; }
+        public int XCoordinate { get; }
+        public int YCoordinate { get; }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string ImagePath { get; set; }
+        public string Name { get; }
+        public string Description { get; }
+        public string ImagePath { get; }
 
 
-        public List<Quest> QuestAvailableHere { get; set; } = new List<Quest>();
+        public List<Quest> QuestAvailableHere { get; } = new List<Quest>();
 
-        public List<MonsterEncounter> MonstersHere { get; set; } =
+        public List<MonsterEncounter> MonstersHere { get; } =
             new List<MonsterEncounter>();
 
         public Trader TraderHere { get; set; }
+
+        public Location(int xCoord, int yCoord, string name, string desc, string imgPath)
+        {
+            XCoordinate = xCoord;
+            YCoordinate = yCoord;
+            Name = name;
+            Description = desc;
+            ImagePath = imgPath;
+        }
 
         public void AddMonster(int monsterID, int changeOfEncountering)
         {

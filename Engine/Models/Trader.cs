@@ -2,9 +2,7 @@
 {
     public class Trader : LivingEntity
     {
-        public Trader(string Name)
-        {
-            this.Name = Name;
-        }
+        public Trader(string Name) : base(Name, 9999,9999,9999)
+        { }
     }
 }
