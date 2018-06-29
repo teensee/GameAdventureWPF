@@ -30,19 +30,19 @@ namespace Engine.Models
             ImagePath = imgPath;
         }
 
-        public void AddMonster(int monsterID, int changeOfEncountering)
+        public void AddMonster(int monsterID, int chanсeOfEncountering)
         {
             if (MonstersHere.Exists(m => m.MonsterID == monsterID))
             {
                 // This monster has already been added to this location.
                 // So, overwrite the ChanceOfEncountering with the new number.
                 MonstersHere.First(m => m.MonsterID == monsterID)
-                    .ChanceOfEncountering = changeOfEncountering;
+                    .ChanceOfEncountering = chanсeOfEncountering;
             }
             else
             {
                 // This monster is not already at this location, so add it.
-                MonstersHere.Add(new MonsterEncounter(monsterID, changeOfEncountering));
+                MonstersHere.Add(new MonsterEncounter(monsterID, chanсeOfEncountering));
             }
         }
 
@@ -79,5 +79,6 @@ namespace Engine.Models
             // If there was a problem, return the last monster in the list.
             return MonsterFactory.GetMonster(MonstersHere.Last().MonsterID);
         }
+
     }
 }
