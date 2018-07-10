@@ -1,24 +1,37 @@
 ﻿
+using Engine.Actions;
+
 namespace Engine.Models
 {
     public class GameItem
     {
+        public enum ItemCategory
+        {
+            Miscellaneous,
+            Weapon
+        }
+
+        public ItemCategory Category { get; }
         public int ItemTypeID { get; }
         public string Name { get; }
         public int Price { get; }
         public bool IsUnique { get; }
+        public AttackWithWeapon Action { get; set; }
 
-        public GameItem(int id, string name, int price, bool isUnique = false)
+        public GameItem(ItemCategory category,int id, string name, int price, 
+                        bool isUnique = false, AttackWithWeapon attack = null)
         {
+            Category = category;
             ItemTypeID = id;
             Name = name;
             Price = price;
             IsUnique = isUnique;
+            Action = attack;
         }
 
-        public GameItem Clone()
-        {
-            return new GameItem(ItemTypeID, Name, Price, IsUnique);
-        }
+        public void PerformAction(LivingEntity actor, LivingEntity target) => Action?.Execute(actor, target);
+
+        public GameItem Clone() =>
+            new GameItem(Category, ItemTypeID, Name, Price, IsUnique, Action);
     }
 }

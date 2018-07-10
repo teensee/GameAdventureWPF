@@ -90,11 +90,6 @@ namespace Engine.ViewModels
             }
         }
 
-        /// <summary>
-        /// Current equipped weapon
-        /// </summary>
-        public Weapon CurrentWeapon { get; set; }
-
         public Trader CurrentTrader
         {
             get => _currentTrader;

@@ -8,7 +8,6 @@ namespace Engine.Models
     public class Player : LivingEntity
     {
         private string _characterClass;
-        private int _hitPoints;
         private int _experiencePoints;
 
         public string CharacterClass
