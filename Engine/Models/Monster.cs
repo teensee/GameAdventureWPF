@@ -16,7 +16,7 @@
             MaximumDamage = maxDamage;
             MinimumDamage = minDamage;
             RewardExpiriencePoints = rewExp;
-            ImageName = string.Format(@"D:\C#repos\WPF\GaneAdventureWPF\Engine\Images\Monsters\{0}", img);
+            ImageName = string.Format($"pack://application:,,,/Engine;component/Images/Monsters/{img}");
 
         }
     }

@@ -66,15 +66,15 @@
     <Compile Include="ViewModels\GameSessionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Location\FarmFields.png" />
-    <Content Include="Images\Location\Farmhouse.png" />
-    <Content Include="Images\Location\HerbalistsGarden.png" />
-    <Content Include="Images\Location\HerbalistsHut.png" />
-    <Content Include="Images\Location\Home.png" />
-    <Content Include="Images\Location\SpiderForest.png" />
-    <Content Include="Images\Location\TownGate.png" />
-    <Content Include="Images\Location\TownSquare.png" />
-    <Content Include="Images\Location\Trader.png" />
+    <Resource Include="Images\Location\FarmFields.png" />
+    <Resource Include="Images\Location\Farmhouse.png" />
+    <Resource Include="Images\Location\HerbalistsGarden.png" />
+    <Resource Include="Images\Location\HerbalistsHut.png" />
+    <Resource Include="Images\Location\Home.png" />
+    <Resource Include="Images\Location\SpiderForest.png" />
+    <Resource Include="Images\Location\TownGate.png" />
+    <Resource Include="Images\Location\TownSquare.png" />
+    <Resource Include="Images\Location\Trader.png" />
     <Resource Include="Images\Monsters\GiantSpider.png" />
     <Resource Include="Images\Monsters\Rat.png" />
     <Resource Include="Images\Monsters\Snake.png" />
