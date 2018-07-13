@@ -24,24 +24,25 @@ namespace Engine.Factories
 
         }
 
+        public static GameItem CreateGameItem(int itemID)
+        {
+            var item = _standardGameItems.FirstOrDefault(i => i.ItemTypeID == itemID)?.Clone();
+            return item;
+        }
+
         private static void BuildMiscellaneous(int id, string name, int price)
         {
             _standardGameItems.Add(new GameItem(GameItem.ItemCategory.Miscellaneous, id, name, price));
         }
 
-        private static void BuildWeapon(int id, string name, int price, int minimumDamage, int maximumDamage)
+        private static void BuildWeapon(int id, string name, int price, 
+                                        int minimumDamage, int maximumDamage)
         {
             GameItem weapon = new GameItem(GameItem.ItemCategory.Weapon, id, name, price, true);
 
             weapon.Action = new AttackWithWeapon(weapon, minimumDamage, maximumDamage);
 
             _standardGameItems.Add(weapon);
-        }
-
-        public static GameItem CreateGameItem(int itemID)
-        {
-            var item = _standardGameItems.FirstOrDefault(i => i.ItemTypeID == itemID)?.Clone();
-            return item;
         }
     }
 }

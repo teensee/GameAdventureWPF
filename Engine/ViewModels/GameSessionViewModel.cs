@@ -25,6 +25,7 @@ namespace Engine.ViewModels
             {
                 if (_currentPlayer != null)
                 {
+                    _currentPlayer.OnActionPerformed -= OnCurrentPlayerPerformedAction;
                     _currentPlayer.OnLeveledUp -= OnCurrentPlayerLeveledUp;
                     _currentPlayer.OnKilled -= OnCurrentPlayerKilled;
                 }
@@ -33,6 +34,7 @@ namespace Engine.ViewModels
 
                 if (_currentPlayer != null)
                 {
+                    _currentPlayer.OnActionPerformed += OnCurrentPlayerPerformedAction;
                     _currentPlayer.OnLeveledUp += OnCurrentPlayerLeveledUp;
                     _currentPlayer.OnKilled += OnCurrentPlayerKilled;
                 }
@@ -226,22 +228,13 @@ namespace Engine.ViewModels
         /// </summary>
         public void AttackCurrentMonster()
         {
-            if (CurrentWeapon == null)
+            if (CurrentPlayer.CurrentWeapon == null)
             {
                 RaiseMessage("You must select a weapon to attack monster.");
                 return;
             }
 
-            //Determine damage to monster
-            int damageToMonster = RandomNumberGenerator.NumberBetween(CurrentWeapon.MinimumDamage, CurrentWeapon.MaximumDamage);
-
-            if (damageToMonster == 0)
-                RaiseMessage($"You missed the {CurrentMonster.Name}.");
-            else
-            {
-                RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");              
-                CurrentMonster.TakeDamage(damageToMonster);
-            }
+            CurrentPlayer.UseCurrentWeaponOn(CurrentMonster);
 
             if (CurrentMonster.IsDead)
             {
@@ -249,16 +242,12 @@ namespace Engine.ViewModels
             }
             else
             {
-                //Let the monster attack
-                var damageToPlayer = RandomNumberGenerator.NumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
-
+                int damageToPlayer = RandomNumberGenerator.NumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
                 if (damageToPlayer == 0)
-                {
-                    RaiseMessage("The monster attacks, but missed you.");
-                }
+                    RaiseMessage($"The {CurrentMonster.Name} attacks, but missed you :)");
                 else
                 {
-                    RaiseMessage($"You recieve {damageToPlayer} from {CurrentMonster.Name}.");
+                    RaiseMessage($"The {CurrentMonster.Name} hit you for {damageToPlayer} points");
                     CurrentPlayer.TakeDamage(damageToPlayer);
                 }
             }
@@ -351,6 +340,8 @@ namespace Engine.ViewModels
 
         #endregion
 
+        private void OnCurrentPlayerPerformedAction(object sender, string result) => RaiseMessage(result);
+
         private void OnCurrentPlayerLeveledUp(object sender, System.EventArgs e) => RaiseMessage($"You receive a {CurrentPlayer.Level}!");
 
         private void OnCurrentPlayerKilled(object sender, System.EventArgs e)
@@ -379,5 +370,6 @@ namespace Engine.ViewModels
                 CurrentPlayer.AddItemToInventory(gameItem);
             }
         }
+
     }
 }

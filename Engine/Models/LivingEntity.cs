@@ -19,8 +19,15 @@ namespace Engine.Models
             get => _currentWeapon;
             set
             {
-                if(_currentWeapon != null)
-                    _currentWeapon.Action.OnActionPerformed -= RaiseOnActionPerformed()
+                if (_currentWeapon != null)
+                    _currentWeapon.Action.OnActionPerformed -= RaiseActionPeroformEvent;
+
+                _currentWeapon = value;
+
+                if (_currentWeapon != null)
+                    _currentWeapon.Action.OnActionPerformed += RaiseActionPeroformEvent;
+
+                OnPropertyChanged();
             }
         }
 
@@ -99,6 +106,10 @@ namespace Engine.Models
         }
 
 
+        public void UseCurrentWeaponOn(LivingEntity target)
+        {
+            CurrentWeapon.PerformAction(this, target);
+        }
 
         public void TakeDamage(int hitPointsOfDamage)
         {
@@ -184,7 +195,7 @@ namespace Engine.Models
             OnKilled?.Invoke(this, new System.EventArgs());
         }
 
-        private void RaiseOnActionPerformed(object sendes, string result)
+        private void RaiseActionPeroformEvent(object sendes, string result)
         {
             OnActionPerformed?.Invoke(this, result);
         }
