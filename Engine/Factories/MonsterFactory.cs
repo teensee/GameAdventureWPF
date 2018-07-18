@@ -10,14 +10,20 @@ namespace Engine.Factories
             switch (monsterID)
             {
                 case 1:
-                    Monster snake = new Monster("Snake", 4, 4, 2, 1, 5, 1, "Snake.png");
+                    Monster snake = new Monster("Snake", 4, 4, 5, 1, "Snake.png")
+                    {
+                        CurrentWeapon = ItemFactory.CreateGameItem(1501)
+                    };
 
                     AddLootItem(snake, 9001, 25);
                     AddLootItem(snake, 9002, 75);
 
                     return snake;
                 case 2:
-                    Monster rat = new Monster("Rat", 5, 5, 2, 1, 5, 1, "Rat.png");
+                    Monster rat = new Monster("Rat", 5, 5, 5, 1, "Rat.png")
+                    {
+                        CurrentWeapon = ItemFactory.CreateGameItem(1502)
+                    };
 
                     AddLootItem(rat, 9003, 25);
                     AddLootItem(rat, 9004, 75);
@@ -25,7 +31,10 @@ namespace Engine.Factories
                     return rat;
 
                 case 3:
-                    Monster giantSpider = new Monster("Giant Spider", 10, 10, 4, 1, 10, 5, "GiantSpider.png");
+                    Monster giantSpider = new Monster("Giant Spider", 10, 10, 10, 5, "GiantSpider.png")
+                    {
+                        CurrentWeapon = ItemFactory.CreateGameItem(1503)
+                    };
 
                     AddLootItem(giantSpider, 9005, 25);
                     AddLootItem(giantSpider, 9006, 72);

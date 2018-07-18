@@ -75,12 +75,16 @@ namespace Engine.ViewModels
             {
 
                 if (_currentMonster != null)
+                {
+                    _currentMonster.OnActionPerformed -= OnCurrentMonsterPerformedAction;
                     _currentMonster.OnKilled -= OnCurrentMonsterKilled;
+                }
 
                 _currentMonster = value;
 
                 if(_currentMonster != null)
                 {
+                    _currentMonster.OnActionPerformed += OnCurrentMonsterPerformedAction;
                     _currentMonster.OnKilled += OnCurrentMonsterKilled;
 
                     RaiseMessage("");
@@ -238,18 +242,12 @@ namespace Engine.ViewModels
 
             if (CurrentMonster.IsDead)
             {
+                //Get new monster
                 GetMonsterAtLocation();
             }
             else
             {
-                int damageToPlayer = RandomNumberGenerator.NumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
-                if (damageToPlayer == 0)
-                    RaiseMessage($"The {CurrentMonster.Name} attacks, but missed you :)");
-                else
-                {
-                    RaiseMessage($"The {CurrentMonster.Name} hit you for {damageToPlayer} points");
-                    CurrentPlayer.TakeDamage(damageToPlayer);
-                }
+                CurrentMonster.UseCurrentWeaponOn(CurrentPlayer);
             }
         }
 
@@ -341,6 +339,8 @@ namespace Engine.ViewModels
         #endregion
 
         private void OnCurrentPlayerPerformedAction(object sender, string result) => RaiseMessage(result);
+
+        private void OnCurrentMonsterPerformedAction(object sender, string result) => RaiseMessage(result);
 
         private void OnCurrentPlayerLeveledUp(object sender, System.EventArgs e) => RaiseMessage($"You receive a {CurrentPlayer.Level}!");
 

@@ -1,5 +1,4 @@
-﻿
-using Engine.Actions;
+﻿using Engine.Actions;
 
 namespace Engine.Models
 {
@@ -16,10 +15,10 @@ namespace Engine.Models
         public string Name { get; }
         public int Price { get; }
         public bool IsUnique { get; }
-        public AttackWithWeapon Action { get; set; }
+        public IAction Action { get; set; }
 
         public GameItem(ItemCategory category,int id, string name, int price, 
-                        bool isUnique = false, AttackWithWeapon attack = null)
+                        bool isUnique = false, IAction attack = null)
         {
             Category = category;
             ItemTypeID = id;

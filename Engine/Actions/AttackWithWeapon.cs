@@ -3,7 +3,7 @@ using Engine.Models;
 
 namespace Engine.Actions
 {
-    public class AttackWithWeapon
+    public class AttackWithWeapon : IAction
     {
         private readonly GameItem _weapon;
         private readonly int _maximumDamage;
@@ -19,10 +19,10 @@ namespace Engine.Actions
             }
 
             if (_minimumDamage < 0)
-                throw new ArgumentException("minimumdamage must be 0 or large");
+                throw new ArgumentException("minimumDamage must be 0 or larger");
 
             if (_maximumDamage < _minimumDamage)
-                throw new ArgumentException("maximumdamage must be >= minimumdamage");
+                throw new ArgumentException("maximumDamage must be >= minimumDamage");
 
             _weapon = weapon;
             _minimumDamage = minimumDamage;
@@ -33,11 +33,14 @@ namespace Engine.Actions
         {
             int damage = RandomNumberGenerator.NumberBetween(_minimumDamage, _maximumDamage);
 
+            string actorName = (actor is Player)   ? "You" : $"The {actor.Name.ToLower()}";
+            string targetName = (target is Player) ? "you" : $"The {target.Name.ToLower()}";
+
             if (damage == 0)
-                ReportResult($"You missed the {target.Name}.");
+                ReportResult($"{actor.Name} missed {target.Name}.");
             else
             {
-                ReportResult($"You hit the {target.Name} for {damage} points.");
+                ReportResult($"{actor.Name} hit the {target.Name} for {damage} point{(damage > 1 ? "s" : "")}.");
                 target.TakeDamage(damage);
             }
       

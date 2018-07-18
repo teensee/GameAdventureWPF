@@ -4,20 +4,16 @@
     {
         public string ImageName { get; }
 
-        public int MaximumDamage { get; }
-        public int MinimumDamage { get; }
-
         public int RewardExpiriencePoints { get; }
 
 
-        public Monster(string name, int maxHP, int currHitPoints, int maxDamage, int minDamage, int rewExp, int rewGold, string img)
+        public Monster(string name, int maxHP, 
+                       int currHitPoints,int rewExp, 
+                       int rewGold, string img)
             : base(name, maxHP, currHitPoints, rewGold)
         {
-            MaximumDamage = maxDamage;
-            MinimumDamage = minDamage;
             RewardExpiriencePoints = rewExp;
             ImageName = string.Format($"pack://application:,,,/Engine;component/Images/Monsters/{img}");
-
         }
     }
 }
