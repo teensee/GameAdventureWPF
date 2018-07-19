@@ -164,7 +164,10 @@ namespace Engine.ViewModels
             if (!CurrentPlayer.Weapons.Any())
                 CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1001));
 
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));
+
             CurrentWorld = WorldFactory.CreateWorld();
+
             CurrentLocation = CurrentWorld.LocationAt(0, -1);
         }
 
@@ -253,7 +256,10 @@ namespace Engine.ViewModels
 
         #endregion
 
-
+        public void UseCurrentConsumable()
+        {
+            CurrentPlayer.UseCurrentComsumable();
+        }
 
         #region Quest logic
 

@@ -222,13 +222,23 @@
                 <ComboBox Grid.Row="0" Grid.Column="0"
                           ItemsSource="{Binding CurrentPlayer.Weapons}"
                           SelectedItem="{Binding CurrentPlayer.CurrentWeapon}"
-                          DisplayMemberPath="Name"
-                          SelectedValuePath="ID"/>
+                          DisplayMemberPath="Name"/>
 
                 <Button Grid.Row="0" Grid.Column="2"
                         Content="Use"
                         Click="OnClick_AttackMonster"
                         Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"/>
+
+                <ComboBox Grid.Row="1" Grid.Column="0"
+                          Visibility="{Binding CurrentPlayer.HasConsumable, Converter={StaticResource BooleanToVisibility}}"
+                          ItemsSource="{Binding CurrentPlayer.Consumable}"
+                          SelectedItem="{Binding CurrentPlayer.CurrentConsumable}"
+                          DisplayMemberPath="Name"/>
+
+                <Button Grid.Row="1" Grid.Column="2"
+                        Content="Use"
+                        Click="OnClick_UseCurrentConsumable"
+                        Visibility="{Binding CurrentPlayer.HasConsumable, Converter={StaticResource BooleanToVisibility}}"/>
             </Grid>
             
             <!-- Movemrnt control -->

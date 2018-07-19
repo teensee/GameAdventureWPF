@@ -61,5 +61,10 @@ namespace GaneAdventureWPF
             trade.DataContext = _gameSessionVM;
             trade.ShowDialog();
         }
+
+        private void OnClick_UseCurrentConsumable(object sender, RoutedEventArgs e)
+        {
+            _gameSessionVM.UseCurrentConsumable();
+        }
     }
 }
