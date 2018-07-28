@@ -2,9 +2,9 @@
 {
     public class QuestStatus : BaseNotificationClass
     {
+        public Quest PlayerQuest { get; }
         private bool _isCompleted;
 
-        public Quest PlayerQuest { get; }
         public bool isCompleted
         {
             get => _isCompleted;

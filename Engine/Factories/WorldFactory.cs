@@ -57,7 +57,7 @@ namespace Engine.Factories
                 1, 0,
                 "Town Gate", 
                 "There is a gate here, protecting the town from giant spider",
-                "ownGate.png");
+                "TownGate.png");
 
 
             newWorld.LocationAt(-1, 0).TraderHere =

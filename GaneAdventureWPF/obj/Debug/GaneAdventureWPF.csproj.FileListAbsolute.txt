@@ -18,3 +18,5 @@ D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\bin\Debug\Engine.pdb
 D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\GaneAdventureWPF.csproj.CopyComplete
 D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\TradeScreen.g.cs
 D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\TradeScreen.baml
+D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\WorldMap.g.cs
+D:\C#repos\WPF\GaneAdventureWPF\GaneAdventureWPF\obj\Debug\WorldMap.baml

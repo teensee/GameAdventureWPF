@@ -165,6 +165,7 @@ namespace Engine.ViewModels
                 CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1001));
 
             CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(2001));
+            CurrentPlayer.LearnRecipe(RecipeFactory.getRecipeByID(1));
 
             CurrentWorld = WorldFactory.CreateWorld();
 
@@ -264,7 +265,7 @@ namespace Engine.ViewModels
         #region Quest logic
 
         /// <summary>
-        /// Complete quest
+        /// Логика заверешения квеста на локации
         /// </summary>
         private void CompleteQuestAtLocation()
         {
@@ -311,7 +312,7 @@ namespace Engine.ViewModels
         }
 
         /// <summary>
-        /// get new quest
+        /// Логика получение квеста на локации
         /// </summary>
         private void GivePlayerQuestsAtLocation()
         {
@@ -328,15 +329,15 @@ namespace Engine.ViewModels
                     RaiseMessage("Return with:");
                     foreach (ItemQuantity itemQuantity in quest.ItemToComplete)
                     {
-                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                        RaiseMessage($"\t{itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
                     }
 
                     RaiseMessage("And you will receive:");
-                    RaiseMessage($"   {quest.RewardExperience} experience points");
-                    RaiseMessage($"   {quest.RewardGold} gold");
+                    RaiseMessage($"\t{quest.RewardExperience} experience points");
+                    RaiseMessage($"\t{quest.RewardGold} gold");
                     foreach (ItemQuantity itemQuantity in quest.RewardItems)
                     {
-                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                        RaiseMessage($"\t{itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
                     }
                 }
             }

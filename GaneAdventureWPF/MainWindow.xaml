@@ -33,7 +33,7 @@
             </MenuItem>
             <MenuItem Header="About">
                 <MenuItem Header="Simple FAQ"/>
-                <MenuItem Header="World map"/>
+                <MenuItem Header="World map" Click="WorldMap_Click"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1" Grid.Column="0" Background="Aquamarine">
@@ -189,6 +189,18 @@
                                                 IsReadOnly="True"/>
                         </DataGrid.Columns>
 
+                    </DataGrid>
+                </TabItem>
+
+                <TabItem Header="Recipes">
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.Recipes}"
+                              AutoGenerateColumns="False"
+                              HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name"
+                                                Binding="{Binding Name}"
+                                                Width="*" />
+                        </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
             </TabControl>   

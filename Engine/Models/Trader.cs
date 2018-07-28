@@ -2,7 +2,8 @@
 {
     public class Trader : LivingEntity
     {
-        public Trader(string Name) : base(Name, 9999,9999,9999)
+        public Trader(string Name) 
+            : base(Name, 9999,9999,9999)
         { }
     }
 }

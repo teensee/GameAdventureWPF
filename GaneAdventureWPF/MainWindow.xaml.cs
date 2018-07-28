@@ -59,12 +59,22 @@ namespace GaneAdventureWPF
             TradeScreen trade = new TradeScreen();
             trade.Owner = this;
             trade.DataContext = _gameSessionVM;
+
             trade.ShowDialog();
         }
 
         private void OnClick_UseCurrentConsumable(object sender, RoutedEventArgs e)
         {
             _gameSessionVM.UseCurrentConsumable();
+        }
+
+        private void WorldMap_Click(object sender, RoutedEventArgs e)
+        {
+            WorldMap map = new WorldMap();
+            map.Owner = this;
+
+            map.ShowDialog();
+
         }
     }
 }
